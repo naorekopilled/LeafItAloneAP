@@ -69,7 +69,7 @@ Leaderboard uploads, Steam stats and achievements are blocked for as long as `ve
 
 ## Known limits
 
-- No seed has been played from start to goal yet. Purchases, level changes, locks, reconnects and the goal report were tested in the real game, some of them with scripted triggers. Which areas are open comes from a collision check of each level's scene, and how much money you can really earn comes from the game data. Neither was walked through by hand. If you get stuck, please open an issue with your `lia_ap.log` from the game folder.
+- Only a few seeds have been played from start to goal yet. Purchases, level changes, locks, reconnects and the goal report were tested in the real game, some of them with scripted triggers. Which areas are open comes from a collision check of each level's scene, and how much money you can really earn comes from the game data. Neither was walked through by hand. If you get stuck, please open an issue with your `lia_ap.log` from the game folder.
 - `Castle Objective: Sell Worthy Bag` only holds filler, because I could not confirm it can be reached.
 - A game update breaks the mod until a new release is out. Steam can hold updates back if you set the game to update only when you launch it, but it will still update then.
 - The server warns that the client does not support compressed connections. It works, the warning is only that.
