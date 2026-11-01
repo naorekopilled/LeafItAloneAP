@@ -1,0 +1,9 @@
+dumps/
+tools/
+backups/
+Archipelago/
+.venv/
+__pycache__/
+*.pyc
+client/build/
+dist/
