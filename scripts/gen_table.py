@@ -21,7 +21,8 @@ LEVELS = {"Hometown": {"scene": 0, "price": 0.004, "bundle": "hometowndetails", 
           "Castle": {"scene": 1, "price": 0.004, "bundle": "castledetails", "areas": "areas1"},
           "Sakura": {"scene": 3, "price": 0.01, "bundle": None, "areas": "areas"}}
 
-# Region -> requirements. Restrictive on purpose: assumed access never exceeds real access.
+# Region -> requirements. Start pockets come from a collision flood of each scene from its spawn point.
+# Anything the flood could not place sits later than it may need to: assumed access must never exceed real access.
 K = lambda s: f"Key: {s}"
 REGIONS = {
     "Hometown": {
@@ -40,8 +41,8 @@ REGIONS = {
         "Throne Room": ["Love Garden", K("Throne Room Love Seal"), K("Throne Room Leaf Seal")],
     },
     "Sakura": {
-        "Fountain": [],
-        "Temple": ["Fountain", K("Temple")],
+        "Statues": [],
+        "Temple": ["Statues", K("Temple")],
         "Shrines": ["Temple", K("Shrines")],
         "Lanterns": ["Temple", K("Lanterns")],
         "Inner Gardens": ["Shrines", "Lanterns"],
@@ -52,13 +53,13 @@ REGIONS = {
 }
 AREA_REGION = {
     "Entrance": "Yard", "Frontyard": "Yard", "Driveway": "Yard", "Porch": "Yard", "Court": "Yard",
-    "Garage": "Yard", "Basement": "Yard", "Shed": "Shed", "Grill": "Backyard", "Pool": "Backyard",
-    "Swings": "Backyard", "Greenhouse": "Greenhouse", "Maze": "Greenhouse",
+    "Garage": "Yard", "Basement": "Yard", "Swings": "Yard", "Shed": "Shed", "Grill": "Backyard", "Pool": "Backyard",
+    "Greenhouse": "Greenhouse", "Maze": "Greenhouse",
     "Gate": "Gate", "Courtyard": "Courtyard", "Stairs": "Courtyard", "Hallway": "Hallway",
-    "Fresco": "Hallway", "Armory": "Hallway", "Library": "Hallway", "Range": "Hallway",
-    "Dinette": "Dinette", "Terrace": "Dinette", "LoveGarden": "Love Garden", "Ruins": "Love Garden",
+    "Fresco": "Hallway", "Range": "Hallway",
+    "Dinette": "Dinette", "Terrace": "Dinette", "Armory": "Dinette", "Library": "Dinette", "LoveGarden": "Love Garden", "Ruins": "Love Garden",
     "Labyrinth": "Love Garden", "LeafGarden": "Love Garden",
-    "Fountain": "Fountain", "Statues": "Fountain", "Temple": "Temple", "Shrines": "Shrines",
+    "Statues": "Statues", "Fountain": "Park", "Temple": "Temple", "Shrines": "Shrines",
     "Lanterns": "Lanterns", "Garden": "Inner Gardens", "Playground": "Inner Gardens",
     "Alley": "Park", "OpenAir": "Park", "Picnic": "Park", "DogRun": "Dog Run", "Recreation": "Dog Run",
 }
@@ -93,27 +94,26 @@ OBJ = {
     "AssembleMosaics": ("Love Garden", ["Activity: Mosaics"]), "ReassembleMosaic": ("Love Garden", ["Activity: Mosaics"]),
     "SolveSlidingPuzzle": ("Love Garden", ["Activity: Sliding Puzzle"]),
     "FindAllCollectables_Castle": ("Love Garden", ["Ability: Crouch"]),
-    "ScoreExactArcheryPoints": ("Hallway", ["Activity: Archery Range"]), "RingBell": ("Hallway", []),
-    "PutBooksOnBookshelf": ("Hallway", []),
+    "ScoreExactArcheryPoints": ("Hallway", ["Activity: Archery Range"]), "RingBell": ("Dinette", []),
+    "PutBooksOnBookshelf": ("Dinette", []),
     "SellWorthyBag": ("Love Garden", ["Progressive Bag (Castle)x2", "Progressive Bag Capacity (Castle)x5", "Income Boost (Castle)x3"]),
     "UnlockTemple": ("Temple", []), "UnlockShrines": ("Shrines", []), "UnlockLanterns": ("Lanterns", []),
     "UnlockPark": ("Park", []), "UnlockDogRun": ("Dog Run", []), "UnlockTree": ("Tree", []),
     "SuckUpLeaves": ("Park", ["Leaf Blower", "Progressive Leaf Blower Suction Mode (Sakura)"]),
     "FindAllCollectables_Sakura": ("Dog Run", ["Ability: Crouch"]),
-    "SpinAllPinwheels": ("Inner Gardens", []),
+    "SpinAllPinwheels": ("Statues", []),
     "CollectLeavesAtDrivingSpeed": ("Dog Run", ["Mini Tractor", "Progressive Tractor Swift Mode (Sakura)"]),
-    "DumpPresetLeafBags": ("Park", []),
-    "LightUpLanterns": ("Lanterns", ["Ability: Lantern Lighting"]),
+    "DumpPresetLeafBags": ("Dog Run", []),
+    "LightUpLanterns": ("Inner Gardens", ["Ability: Lantern Lighting"]),
 }
 EXCLUDED_LOCS = {"SellWorthyBag"}  # bag value threshold unverified, so only filler may land here
 CLEAN = {"Hometown": "CleanUpAllLeaves_Hometown", "Castle": "CleanUpAllLeaves_Castle", "Sakura": "CleanUpAllLeaves_Sakura"}
 
 SHOP = {  # level -> [(item line, actor id, price source actor)] in exhibit chain order
-    "Hometown": [("Rake", "Rake", "Yard"), ("Leaf Blower", "LeafBlower", "Shed"), ("Medium Bag", "MediumLeafBag", "Shed"), ("Big Bag", "BigLeafBag", "Shed")],
+    "Hometown": [("Rake", "Rake", "Yard"), ("Leaf Blower", "LeafBlower", "Yard"), ("Medium Bag", "MediumLeafBag", "Yard"), ("Big Bag", "BigLeafBag", "Yard")],
     "Castle": [("Leaf Blower", "LeafBlower", "Hallway"), ("Big Bag", "BigLeafBag", "Hallway"), ("Giant Bag", "GiantLeafBag", "Hallway")],
     "Sakura": [("Mini Tractor", "Tractor", "Dog Run")],
 }
-SHOP["Hometown"][0] = ("Rake", "Rake", "Shed")
 ACTORS = {r["tt"]["m_Name"]: r["tt"] for r in d["actors"]}
 def price(actor, level):
     rr = refs(ACTORS[actor])

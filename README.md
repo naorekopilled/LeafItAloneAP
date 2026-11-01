@@ -61,7 +61,7 @@ Saves go to `AppData/LocalLow/Eternity/Leaf it Alone/AP/<seed>_<slot>/`, so your
 - Clearing an area and finishing an objective send checks. Their normal rewards are withheld and come from the multiworld instead.
 - Tools you have not received cannot be equipped, including the Rake lying in Castle and the tools you start Sakura with.
 - Money is per level. The Money filler goes to the level you are in, and a Money Bundle waits for its own level.
-- Doors need their key item. The Garage door is open from the start because the game has no key for it.
+- Doors need their key item. The Garage has no key: the button in the Shed building opens it. `Key: Shed` opens the gate to the shed roof.
 
 The goal is to clean up all leaves in all three levels. Each level gives one `Level Cleared`, and three of them finish your seed.
 
@@ -69,7 +69,7 @@ Leaderboard uploads, Steam stats and achievements are blocked for as long as `ve
 
 ## Known limits
 
-- No seed has been played from start to goal yet. Purchases, level changes, locks, reconnects and the goal report were tested in the real game, some of them with scripted triggers. Which areas are open at the start of a level, and how much money you can really earn, come from the game data and were not walked through. If you get stuck, please open an issue with your `lia_ap.log` from the game folder.
+- No seed has been played from start to goal yet. Purchases, level changes, locks, reconnects and the goal report were tested in the real game, some of them with scripted triggers. Which areas are open comes from a collision check of each level's scene, and how much money you can really earn comes from the game data. Neither was walked through by hand. If you get stuck, please open an issue with your `lia_ap.log` from the game folder.
 - `Castle Objective: Sell Worthy Bag` only holds filler, because I could not confirm it can be reached.
 - A game update breaks the mod until a new release is out. Steam can hold updates back if you set the game to update only when you launch it, but it will still update then.
 - The server warns that the client does not support compressed connections. It works, the warning is only that.

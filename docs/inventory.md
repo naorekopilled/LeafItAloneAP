@@ -44,33 +44,34 @@ The level order comes from `StoryModeSceneProperty`: Hometown, then Castle, then
 | Money Bundle | Castle x10, Sakura x11, 25 money each, needed so every shop entry is affordable |
 | Filler | Money (5 in the current level), Nothing |
 
-The Garage is not a key: its door state has no required feature in the assets, so it stays open from the start. `Park` is one item although vanilla accepts either of two features.
+The Garage is not a key: a free button inside the Shed building opens it. `Key: Shed` opens the roof gate. `Park` is one item although vanilla accepts either of two features.
 
 Vanilla money rewards (Courtyard 15, Ruins 40, Shrines 40, Grill 15, Garage 7.5) are withheld. Their slots hold normal items.
 
 ## Access logic
 
-Derived from reward effects, objective availability and placing doors inside area colliders. It is restrictive on purpose: logic may demand more than the game does, never less. Which areas are physically open at level start was not walked in game.
+Start pockets come from a collision flood of each scene from its spawn point, with doors shut. Anything the flood could not place sits later than it may need to, so logic can ask for more than the game does, never less. Castle's outer walls leak in the flood, so Castle leans on vanilla reward and objective order. None of this has been walked in game.
 
-| Level | Area or check | Requires |
-|---|---|---|
-| Hometown | Garage | `Garage` |
-| Hometown | Shed | `Shed` (vanilla reward Basement_2) |
-| Hometown | Grill | `Grill` (Shed_2) |
-| Hometown | Greenhouse, Maze | `Greenhouse` (Pool_2). Maze uses the same door state |
-| Hometown | Secret Room | `SecretRoom` (Greenhouse_1) |
-| Castle | Courtyard and beyond | `Courtyard` (Gate_1) |
-| Castle | Hallway, Shop | `Hallway` (Stairs_1). `ShopDoor` carries `HallwayLocked` |
-| Castle | Dinette | `Dinette` (Fresco_2) |
-| Castle | Love Garden | `LoveGarden` (Terrace_2) |
-| Castle | Throne Room | `ThroneRoom_LoveGarden` and `ThroneRoom_LeafGarden` |
-| Sakura | Temple | `Temple` (Statues_1) |
-| Sakura | Shrines, Lanterns | `Shrines`, `Lanterns` (both Temple_1) |
-| Sakura | Park | `Park_Garden` or `Park_Playground` (`requireOnlyOne` 1) |
-| Sakura | Dog Run | `DogRun` (OpenAir_1) |
-| Sakura | Tree | `Tree` (DogRun_1) plus a 500 paid door |
-
-Castle's shop sits behind `HallwayLocked`, so its entries need `Hallway` in logic.
+| Level | Region | Areas | Requires |
+|---|---|---|---|
+| Hometown | Yard | Entrance, Frontyard, Driveway, Porch, Court, Garage, Basement, Swings, shop | Nothing. The Shed building and its Garage button are open |
+| Hometown | Shed | Shed roof | `Key: Shed` |
+| Hometown | Backyard | Grill, Pool | Shed plus `Key: Grill` |
+| Hometown | Greenhouse | Greenhouse, Maze | Backyard plus `Key: Greenhouse` |
+| Hometown | Secret Room | Secret Room objective | Greenhouse plus `Key: Secret Room` |
+| Castle | Gate | Gate | Nothing |
+| Castle | Courtyard | Courtyard, Stairs | `Key: Courtyard` |
+| Castle | Hallway | Hallway, Fresco, Range, shop | Courtyard plus `Key: Hallway`. Range also needs `Activity: Archery Range` |
+| Castle | Dinette | Dinette, Terrace, Armory, Library | Hallway plus `Key: Dinette` |
+| Castle | Love Garden | Love Garden, Ruins, Labyrinth, Leaf Garden | Dinette plus `Key: Love Garden` |
+| Castle | Throne Room | Throne Room | Love Garden plus both Throne Room seals |
+| Sakura | Statues | Statues | Nothing |
+| Sakura | Temple | Temple | `Key: Temple` |
+| Sakura | Shrines, Lanterns | Shrines, Lanterns | Temple plus their keys |
+| Sakura | Inner Gardens | Garden, Playground | Shrines and Lanterns |
+| Sakura | Park | Fountain, Alley, Open Air, Picnic | Inner Gardens plus `Key: Park` |
+| Sakura | Dog Run | Dog Run, Recreation, Mini Tractor shop | Park plus `Key: Dog Run` |
+| Sakura | Tree | Tree | Dog Run, `Key: Tree` and 500 money |
 
 ## Money model
 
