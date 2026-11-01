@@ -27,10 +27,11 @@ K = lambda s: f"Key: {s}"
 REGIONS = {
     "Hometown": {
         "Yard": [],
+        "Garage": ["Yard", "Ability: Sprint"],  # the Shed button opens the door, then you have to outrun it
         "Shed": ["Yard", K("Shed")],
         "Backyard": ["Shed", K("Grill")],
         "Greenhouse": ["Backyard", K("Greenhouse")],
-        "Secret Room": ["Greenhouse", K("Secret Room")],
+        "Secret Room": ["Greenhouse", "Garage", K("Secret Room")],
     },
     "Castle": {
         "Gate": [],
@@ -53,7 +54,7 @@ REGIONS = {
 }
 AREA_REGION = {
     "Entrance": "Yard", "Frontyard": "Yard", "Driveway": "Yard", "Porch": "Yard", "Court": "Yard",
-    "Garage": "Yard", "Basement": "Yard", "Swings": "Yard", "Shed": "Shed", "Grill": "Backyard", "Pool": "Backyard",
+    "Garage": "Garage", "Basement": "Garage", "Swings": "Garage", "Shed": "Shed", "Grill": "Backyard", "Pool": "Backyard",
     "Greenhouse": "Greenhouse", "Maze": "Greenhouse",
     "Gate": "Gate", "Courtyard": "Courtyard", "Stairs": "Courtyard", "Hallway": "Hallway",
     "Fresco": "Hallway", "Range": "Hallway",
@@ -82,9 +83,9 @@ ACTIVITY = {"UnlockSlidingPuzzle": "Sliding Puzzle", "UnlockMemory": "Memory Gam
 
 # name -> (region, extra requirements). Objectives absent here are not locations.
 OBJ = {
-    "JumpIntoLeafPile": ("Yard", ["TOOL"]), "ScoreBasketball": ("Yard", ["Ability: Bag Sealing"]),
+    "JumpIntoLeafPile": ("Yard", ["TOOL"]), "ScoreBasketball": ("Garage", ["Ability: Bag Sealing"]),
     "SealBags": ("Yard", ["Ability: Bag Sealing", "TOOL"]), "ThrowLeafBag": ("Yard", ["Ability: Bag Sealing"]),
-    "FindAllCollectables_Hometown": ("Greenhouse", ["Ability: Crouch"]), "UnlockGarage": ("Yard", []),
+    "FindAllCollectables_Hometown": ("Greenhouse", ["Ability: Crouch", "Ability: Sprint"]), "UnlockGarage": ("Garage", []),
     "UnlockShed": ("Shed", []), "UnlockGrill": ("Backyard", []), "UnlockGreenhouse": ("Greenhouse", []),
     "UnlockSecretRoom": ("Secret Room", []),
     "UnlockCourtyard": ("Courtyard", []), "UnlockHallway": ("Hallway", []), "UnlockDinette": ("Dinette", []),
@@ -101,7 +102,7 @@ OBJ = {
     "UnlockPark": ("Park", []), "UnlockDogRun": ("Dog Run", []), "UnlockTree": ("Tree", []),
     "SuckUpLeaves": ("Park", ["Leaf Blower", "Progressive Leaf Blower Suction Mode (Sakura)"]),
     "FindAllCollectables_Sakura": ("Dog Run", ["Ability: Crouch"]),
-    "SpinAllPinwheels": ("Statues", []),
+    "SpinAllPinwheels": ("Statues", ["Leaf Blower"]),
     "CollectLeavesAtDrivingSpeed": ("Dog Run", ["Mini Tractor", "Progressive Tractor Swift Mode (Sakura)"]),
     "DumpPresetLeafBags": ("Dog Run", []),
     "LightUpLanterns": ("Inner Gardens", ["Ability: Lantern Lighting"]),
@@ -209,7 +210,7 @@ add_item(K("Shrines"), "progression", kind="feature", level="Sakura", features=[
 add_item(K("Lanterns"), "progression", kind="feature", level="Sakura", features=[29])
 add_item(K("Park"), "progression", kind="modifier", level="Sakura", modifiers=[mods["UnlockPark_Garden"]["uniqueId"]])
 for name, label in ABILITY.items():
-    add_item(f"Ability: {label}", "progression" if label in ("Bag Sealing", "Crouch", "Lantern Lighting") else "useful", kind="modifier", level={"UnlockLanternLighting": "Sakura"}.get(name, "Hometown"), modifiers=[mods[name]["uniqueId"]])
+    add_item(f"Ability: {label}", "progression" if label in ("Sprint", "Bag Sealing", "Crouch", "Lantern Lighting") else "useful", kind="modifier", level={"UnlockLanternLighting": "Sakura"}.get(name, "Hometown"), modifiers=[mods[name]["uniqueId"]])
 for name, label in ACTIVITY.items():
     add_item(f"Activity: {label}", "progression", kind="modifier", level="Castle", modifiers=[mods[name]["uniqueId"]])
 add_item("Income Boost (Hometown)", "progression", 3, kind="tiered", level="Hometown", modifiers=[36, 35, 39])

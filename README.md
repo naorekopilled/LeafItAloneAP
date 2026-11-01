@@ -61,7 +61,7 @@ Saves go to `AppData/LocalLow/Eternity/Leaf it Alone/AP/<seed>_<slot>/`, so your
 - Clearing an area and finishing an objective send checks. Their normal rewards are withheld and come from the multiworld instead.
 - Tools you have not received cannot be equipped, including the Rake lying in Castle and the tools you start Sakura with.
 - Money is per level. The Money filler goes to the level you are in, and a Money Bundle waits for its own level.
-- Doors need their key item. The Garage has no key: the button in the Shed building opens it. `Key: Shed` opens the gate to the shed roof.
+- Doors need their key item. The Garage has no key: the button in the Shed building opens it, but you need Sprint to reach it in time. `Key: Shed` opens the shed roof and the small area beside the Shed. The inside of the Shed, where the shop is, is open from the start.
 
 The goal is to clean up all leaves in all three levels. Each level gives one `Level Cleared`, and three of them finish your seed.
 

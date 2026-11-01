@@ -64,8 +64,30 @@ class TestStartPockets(LeafItAloneTestBase):
         self.assertTrue(self.can_reach_location("Hometown Shop: Medium Bag"))
 
     def test_shed_key_is_only_for_the_roof(self) -> None:
-        self.assertTrue(self.can_reach_location("Hometown Clear Basement"))
         self.assertFalse(self.can_reach_location("Hometown Clear Shed"))
+        self.collect_by_name("Key: Shed")
+        self.assertTrue(self.can_reach_location("Hometown Clear Shed"))
+
+    def test_garage_side_needs_sprint(self) -> None:
+        names = ("Hometown Clear Garage", "Hometown Clear Basement", "Hometown Clear Swings", "Hometown Objective: Unlock Garage")
+        for name in names:
+            self.assertFalse(self.can_reach_location(name), name)
+        self.collect_by_name("Ability: Sprint")
+        for name in names:
+            self.assertTrue(self.can_reach_location(name), name)
+
+    def test_pinwheels_need_the_leaf_blower(self) -> None:
+        self.collect_by_name("Level: Sakura")
+        self.assertFalse(self.can_reach_location("Sakura Objective: Spin All Pinwheels"))
+        self.collect_by_name("Leaf Blower")
+        self.assertTrue(self.can_reach_location("Sakura Objective: Spin All Pinwheels"))
+
+    def test_castle_shop_needs_the_hallway(self) -> None:
+        self.collect_by_name(["Level: Castle", "Money Bundle (Castle)"])
+        self.collect(self.get_items_by_name("Money Bundle (Castle)"))
+        self.assertFalse(self.can_reach_location("Castle Shop: Big Bag"))
+        self.collect_by_name(["Key: Courtyard", "Key: Hallway"])
+        self.assertTrue(self.can_reach_location("Castle Shop: Big Bag"))
 
     def test_castle_library_waits_for_dinette(self) -> None:
         self.collect_by_name(["Level: Castle", "Key: Courtyard", "Key: Hallway"])

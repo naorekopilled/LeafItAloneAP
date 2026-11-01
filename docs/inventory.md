@@ -44,7 +44,7 @@ The level order comes from `StoryModeSceneProperty`: Hometown, then Castle, then
 | Money Bundle | Castle x10, Sakura x11, 25 money each, needed so every shop entry is affordable |
 | Filler | Money (5 in the current level), Nothing |
 
-The Garage is not a key: a free button inside the Shed building opens it. `Key: Shed` opens the roof gate. `Park` is one item although vanilla accepts either of two features.
+The Garage is not a key: a free button inside the Shed building opens it, and you need Sprint to reach it in time. `Key: Shed` opens the roof gate and the small area beside the Shed. `Park` is one item although vanilla accepts either of two features.
 
 Vanilla money rewards (Courtyard 15, Ruins 40, Shrines 40, Grill 15, Garage 7.5) are withheld. Their slots hold normal items.
 
@@ -54,11 +54,12 @@ Start pockets come from a collision flood of each scene from its spawn point, wi
 
 | Level | Region | Areas | Requires |
 |---|---|---|---|
-| Hometown | Yard | Entrance, Frontyard, Driveway, Porch, Court, Garage, Basement, Swings, shop | Nothing. The Shed building and its Garage button are open |
+| Hometown | Yard | Entrance, Frontyard, Driveway, Porch, Court, shop | Nothing. The Shed building and its Garage button are open |
+| Hometown | Garage | Garage, Basement, Swings | `Ability: Sprint`, to reach the door after pressing the button |
 | Hometown | Shed | Shed roof | `Key: Shed` |
 | Hometown | Backyard | Grill, Pool | Shed plus `Key: Grill` |
 | Hometown | Greenhouse | Greenhouse, Maze | Backyard plus `Key: Greenhouse` |
-| Hometown | Secret Room | Secret Room objective | Greenhouse plus `Key: Secret Room` |
+| Hometown | Secret Room | Secret Room objective | Greenhouse, Garage and `Key: Secret Room` |
 | Castle | Gate | Gate | Nothing |
 | Castle | Courtyard | Courtyard, Stairs | `Key: Courtyard` |
 | Castle | Hallway | Hallway, Fresco, Range, shop | Courtyard plus `Key: Hallway`. Range also needs `Activity: Archery Range` |
