@@ -1,6 +1,6 @@
 # Leaf it Alone inventory
 
-Steam build ID: 26351512. Unity 6000.5.6f1. Status: implemented. `apworld/leaf_it_alone/table.py` is the generated source of truth for items and locations.
+Steam build ID: 26384472 (game data unchanged since 26351512). Unity 6000.5.6f1. Status: implemented. `apworld/leaf_it_alone/table.py` is the generated source of truth for items and locations.
 
 
 ## Summary counts
