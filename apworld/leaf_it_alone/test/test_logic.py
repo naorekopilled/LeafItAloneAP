@@ -18,6 +18,7 @@ class TestDefault(LeafItAloneTestBase):
         self.assertTrue(self.can_reach_location("Castle Clear Gate"))
 
     def test_key_gates_area(self) -> None:
+        self.collect_by_name("Ability: Sprint")
         self.assertFalse(self.can_reach_location("Hometown Clear Shed"))
         self.collect_by_name("Key: Shed")
         self.assertTrue(self.can_reach_location("Hometown Clear Shed"))
@@ -63,9 +64,11 @@ class TestStartPockets(LeafItAloneTestBase):
         self.collect(self.get_items_by_name("Income Boost (Hometown)"))
         self.assertTrue(self.can_reach_location("Hometown Shop: Medium Bag"))
 
-    def test_shed_key_is_only_for_the_roof(self) -> None:
-        self.assertFalse(self.can_reach_location("Hometown Clear Shed"))
+    def test_shed_leaves_need_the_garage(self) -> None:
+        # The Garage feature is what lets the Shed area's leaves move, not the Shed key
         self.collect_by_name("Key: Shed")
+        self.assertFalse(self.can_reach_location("Hometown Clear Shed"))
+        self.collect_by_name("Ability: Sprint")
         self.assertTrue(self.can_reach_location("Hometown Clear Shed"))
 
     def test_garage_side_needs_sprint(self) -> None:
