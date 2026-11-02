@@ -1,6 +1,6 @@
 # Leaf it Alone inventory
 
-Steam build ID: 26351512. Unity 6000.5.6f1. Status: implemented. `apworld/leaf_it_alone/table.py` is the generated source of truth for items and locations.
+Steam build ID: 26384472 (game data unchanged since 26351512). Unity 6000.5.6f1. Status: implemented. `apworld/leaf_it_alone/table.py` is the generated source of truth for items and locations.
 
 
 ## Summary counts
@@ -44,7 +44,7 @@ The level order comes from `StoryModeSceneProperty`: Hometown, then Castle, then
 | Money Bundle | Castle x10, Sakura x11, 25 money each, needed so every shop entry is affordable |
 | Filler | Money (5 in the current level), Nothing |
 
-The Garage is not a key: a free button inside the Shed building opens it, and you need Sprint to reach it in time. `Key: Shed` opens the roof gate and the small area beside the Shed. `Park` is one item although vanilla accepts either of two features.
+The Garage is not a key: a free button inside the Shed building opens it, and you need Sprint to reach it in time. `Key: Shed` opens the roof gate and the small area beside the Shed. The Shed's own leaves stay frozen until the Garage is unlocked, so the Shed region sits behind the Garage. `Park` is one item although vanilla accepts either of two features.
 
 Vanilla money rewards (Courtyard 15, Ruins 40, Shrines 40, Grill 15, Garage 7.5) are withheld. Their slots hold normal items.
 
@@ -56,7 +56,7 @@ Start pockets come from a collision flood of each scene from its spawn point, wi
 |---|---|---|---|
 | Hometown | Yard | Entrance, Frontyard, Driveway, Porch, Court, shop | Nothing. The Shed building and its Garage button are open |
 | Hometown | Garage | Garage, Basement, Swings | `Ability: Sprint`, to reach the door after pressing the button |
-| Hometown | Shed | Shed roof | `Key: Shed` |
+| Hometown | Shed | Shed, Shed roof | Garage plus `Key: Shed`. The Garage feature unfreezes the Shed's leaves |
 | Hometown | Backyard | Grill, Pool | Shed plus `Key: Grill` |
 | Hometown | Greenhouse | Greenhouse, Maze | Backyard plus `Key: Greenhouse` |
 | Hometown | Secret Room | Secret Room objective | Greenhouse, Garage and `Key: Secret Room` |

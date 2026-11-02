@@ -28,7 +28,7 @@ REGIONS = {
     "Hometown": {
         "Yard": [],
         "Garage": ["Yard", "Ability: Sprint"],  # the Shed button opens the door, then you have to outrun it
-        "Shed": ["Yard", K("Shed")],
+        "Shed": ["Garage", K("Shed")],  # Shed leaves only simulate once the Garage feature is unlocked
         "Backyard": ["Shed", K("Grill")],
         "Greenhouse": ["Backyard", K("Greenhouse")],
         "Secret Room": ["Greenhouse", "Garage", K("Secret Room")],
