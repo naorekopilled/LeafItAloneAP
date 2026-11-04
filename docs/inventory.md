@@ -1,6 +1,6 @@
 # Leaf it Alone inventory
 
-Steam build ID: 26384472 (game data unchanged since 26351512). Unity 6000.5.6f1. Status: implemented. `apworld/leaf_it_alone/table.py` is the generated source of truth for items and locations.
+Steam build ID: 26427508. Unity 6000.5.6f1. Status: implemented. `apworld/leaf_it_alone/table.py` is the generated source of truth for items and locations.
 
 
 ## Summary counts
@@ -41,7 +41,7 @@ The level order comes from `StoryModeSceneProperty`: Hometown, then Castle, then
 | Activities | Sliding Puzzle, Memory Game, Mosaics, Archery Range, Petal Sort |
 | Stat rewards | Income Boost x3 per Hometown and Castle, Move Speed x3, Sprint Speed x2, Upgrade Discount x2, Amplify Upgrades, Amplify Suction Range |
 | Level unlocks | Hometown, Castle, Sakura |
-| Money Bundle | Castle x10, Sakura x11, 25 money each, needed so every shop entry is affordable |
+| Money Bundle | Castle x10, Sakura x10, 25 money each, needed so every shop entry is affordable |
 | Filler | Money (5 in the current level), Nothing |
 
 The Garage is not a key: a free button inside the Shed building opens it, and you need Sprint to reach it in time. `Key: Shed` opens the roof gate and the small area beside the Shed. The Shed's own leaves stay frozen until the Garage is unlocked, so the Shed region sits behind the Garage. `Park` is one item although vanilla accepts either of two features.
@@ -80,7 +80,7 @@ Start pockets come from a collision flood of each scene from its spawn point, wi
 |---|---|---|---|
 | Hometown | 716.80 | 544.97 | 0 |
 | Castle | 982.02 | 1113.52 | 10 |
-| Sakura | 2600.96 | 2600.95 | 11 |
+| Sakura | 2600.96 | 2574.99 | 10 |
 
 Income counts leaves in areas reachable with held items, times leaf price, times income boosts, plus bundles. Each shop entry needs the running total of all entries at or below its price, so cheap entries unlock first. Bundles cover 110% of spend. Money is stored per level inside one save (`GameState.StatesBySceneId`) and in hundredths (`MoneyDataModel`).
 
@@ -244,14 +244,14 @@ Area reward locations: 17.
 | BagCapacity_Sakura | 6 | 10.0, 15.0, 20.0, 25.0, 25.0, 25.0 | Upgrades/BAG_CAPACITY |
 | LeafBlowerSuctionMode_Sakura | 1 | 60.0 | - |
 | LeafBlowerSuctionRate_Sakura | 4 | 26.0, 35.0, 45.0, 56.0 | Upgrades/UNDERPRESSURE |
-| TractorInletRange_Sakura | 5 | 59.0, 79.0, 89.0, 99.99, 99.99 | Upgrades/INLET_SUCTION_RANGE |
-| TractorStartupTime_Sakura | 3 | 45.0, 60.0, 75.0 | Upgrades/TRACTOR_STARTUP_TIME |
+| TractorInletRange_Sakura | 5 | 59.0, 79.0, 89.0, 95.0, 99.0 | Upgrades/INLET_SUCTION_RANGE |
+| TractorStartupTime_Sakura | 3 | 45.0, 59.0, 75.0 | Upgrades/TRACTOR_STARTUP_TIME |
 | TractorSwiftMode_Sakura | 1 | 95.0 | - |
 | TractorAcceleration_Sakura | 3 | 65.0, 80.0, 95.0 | Upgrades/TRACTOR_ACCELERATION |
-| TractorTopSpeed_Sakura | 4 | 69.0, 89.0, 99.99, 99.99 | Upgrades/TRACTOR_TOP_SPEED |
-| TractorSteering_Sakura | 3 | 70.0, 90.0, 99.0 | Upgrades/TRACTOR_STEERING |
+| TractorTopSpeed_Sakura | 4 | 65.0, 85.0, 95.0, 99.0 | Upgrades/TRACTOR_TOP_SPEED |
+| TractorSteering_Sakura | 3 | 70.0, 85.0, 99.0 | Upgrades/TRACTOR_STEERING |
 
-Upgrade tiers: 30. Total upgrade cost: 1900.96. Leaves: 260096. Leaf price: 0.01. Base income from all leaves: 2600.96.
+Upgrade tiers: 30. Total upgrade cost: 1875.00. Leaves: 260096. Leaf price: 0.01. Base income from all leaves: 2600.96.
 
 | Objective | Type | Class | Value |
 |---|---|---|---|
