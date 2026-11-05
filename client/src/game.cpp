@@ -119,7 +119,8 @@ static void h_Equip(obj self, obj item, void* m) {
     }
     o_Equip(self, item, m);
 }
-constexpr int PLAYER_ACTOR = 1, TRACTOR_FEATURE = 39;
+constexpr int PLAYER_ACTOR = 1, TRACTOR_FEATURE = 39, SAKURA = 3;
+constexpr float SAKURA_TRACTOR_POS[3] = {10.2f, 7.7f, -11.7f};  // open ground beside the tractor shop
 struct ShopEntry { int actor; float price; };
 // Each exhibit sells a chain: bag exhibits advance to the next bag after each purchase.
 static const std::map<int, std::vector<ShopEntry>> CHAINS_H = {{19, {{19, 0.75f}, {6, 3.49f}}}, {3, {{3, 7.49f}}}, {4, {{4, 49.99f}}}};
@@ -275,7 +276,9 @@ static void grant_actor(int actor) {
     uintptr_t st = *(uintptr_t*)(*(uintptr_t*)(rg + 0x10) + 0xa0);
     float pos[3] = {0, 0, 0};
     obj player = K(obj (*)(obj, int, void*), R_FirstActor)(mgr, PLAYER_ACTOR, nullptr);
-    if (player) {  // the exhibit stays for its shop check, so a received tool is a new actor by the player
+    if (tractor && scene_id() == SAKURA) {  // by the player it can land behind Sakura's TractorBlock walls
+        memcpy(pos, SAKURA_TRACTOR_POS, sizeof pos);
+    } else if (player) {  // the exhibit stays for its shop check, so a received tool is a new actor by the player
         obj tr = K(obj (*)(obj, void*), R_GetTransform)(player, nullptr);
         K(void (*)(float*, obj, void*), R_TransformGetPos)(pos, tr, nullptr);
         pos[0] += 1.5f;
@@ -406,6 +409,12 @@ void test_tp(float* p) {
     obj player = K(obj (*)(obj, int, void*), R_FirstActor)(find_mgr(D_ActorMgr), PLAYER_ACTOR, nullptr);
     obj tr = K(obj (*)(obj, void*), R_GetTransform)(player, nullptr);
     K(void (*)(obj, float*, void*), R_TransformSetPos)(tr, p, nullptr);
+}
+void test_pos() {
+    float p[3];
+    obj player = K(obj (*)(obj, int, void*), R_FirstActor)(find_mgr(D_ActorMgr), PLAYER_ACTOR, nullptr);
+    K(void (*)(float*, obj, void*), R_TransformGetPos)(p, K(obj (*)(obj, void*), R_GetTransform)(player, nullptr), nullptr);
+    alog("[state] player at %.2f %.2f %.2f", p[0], p[1], p[2]);
 }
 void test_reward(int id) { h_Reward(find_mgr(D_RewardMgr), id, nullptr); }
 void test_buy(int id) {

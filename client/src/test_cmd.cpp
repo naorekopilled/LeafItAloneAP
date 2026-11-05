@@ -53,6 +53,8 @@ void test_tick(uintptr_t ga) {
     } else if (c == "tp") {
         float p[3]; s >> p[0] >> p[1] >> p[2];
         extern void test_tp(float*); test_tp(p);
+    } else if (c == "pos") {
+        extern void test_pos(); test_pos();
     } else if (c == "state") {
         obj m = mgr(D_MoneyMgr);
         alog("[state] money=%d", ((int (*)(obj, void*))(ga + R_GetMoney))(m, nullptr));

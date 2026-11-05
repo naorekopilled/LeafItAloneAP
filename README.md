@@ -60,6 +60,7 @@ Saves go to `AppData/LocalLow/Eternity/Leaf it Alone/AP/<seed>_<slot>/`, so your
 - Upgrades are progressive, with one item line per level. A Hometown upgrade does nothing in Castle or Sakura.
 - Clearing an area and finishing an objective send checks. Their normal rewards are withheld and come from the multiworld instead.
 - Tools you have not received cannot be equipped, including the Rake lying in Castle and the tools you start Sakura with.
+- A received Mini Tractor appears next to you, except in Sakura, where it appears beside the tractor shop. The tractor in the shop stays there for its check.
 - Money is per level. The Money filler goes to the level you are in, and a Money Bundle waits for its own level.
 - Doors need their key item. The Garage has no key: the button in the Shed building opens it, but you need Sprint to reach it in time. `Key: Shed` opens the shed roof and the small area beside the Shed. The inside of the Shed, where the shop is, is open from the start.
 
