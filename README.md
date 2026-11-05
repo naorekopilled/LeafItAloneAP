@@ -8,7 +8,7 @@ Singleplayer. Tested on Linux through Proton. Windows has not been tested.
 
 ## What you need
 
-- Leaf it Alone on Steam, **Steam build 26427508** (the game shows `v1.1.6` in the corner of the main menu)
+- Leaf it Alone on Steam, **Steam build 26453016** (the game shows `v1.1.7` in the corner of the main menu)
 - Archipelago 0.6.8 or newer
 - `version.dll` and `leaf_it_alone.apworld` from the [releases page](../../releases)
 
